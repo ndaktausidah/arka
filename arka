@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Mandiri - Internet Banking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0047AB 0%, #0066CC 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .bank-container {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .bank-header {
+            background: #0047AB;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .bank-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .bank-logo img {
+            height: 30px;
+        }
+        
+        .bank-subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        .security-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .login-form {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        
+        .input-with-icon input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .input-with-icon input:focus {
+            outline: none;
+            border-color: #0047AB;
+            box-shadow: 0 0 0 2px rgba(0, 71, 171, 0.1);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #0047AB;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .login-btn:hover {
+            background: #003580;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+        
+        .feature {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .feature i {
+            color: #0047AB;
+            font-size: 16px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px;
+            color: #777;
+            font-size: 12px;
+            border-top: 1px solid #eee;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0047AB;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="bank-container">
+        <div class="bank-header">
+            <div class="security-badge">
+                <i class="fas fa-lock"></i> AMAN
+            </div>
+            <div class="bank-logo">
+                <i class="fas fa-university"></i>
+                BANK MANDIRI
+            </div>
+            <div class="bank-subtitle">Internet Banking</div>
+        </div>
+        
+        <div class="login-form">
+            <div class="form-group">
+                <label for="email">USER ID / EMAIL</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-user"></i>
+                    <input type="email" id="email" placeholder="Masukkan User ID atau Email" required>
+                </div>
+            </div>
+            
+            <button class="login-btn" onclick="login()">
+                <i class="fas fa-sign-in-alt"></i>
+                LOGIN
+            </button>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-mobile-alt"></i>
+                Mobile Banking
+            </div>
+            <div class="feature">
+                <i class="fas fa-credit-card"></i>
+                Kartu Kredit
+            </div>
+            <div class="feature">
+                <i class="fas fa-question-circle"></i>
+                Bantuan
+            </div>
+        </div>
+        
+        <div class="footer">
+            © 2024 Bank Mandiri. Hak Cipta Dilindungi.
+        </div>
+    </div>
+    
+    <div class="modal" id="loadingModal">
+        <div class="modal-content">
+            <div class="loader"></div>
+            <h3>Memproses Login...</h3>
+            <p>Mohon tunggu sebentar</p>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            const email = document.getElementById('email').value;
+            
+            if (!email) {
+                alert('Silakan masukkan email terlebih dahulu');
+                return;
+            }
+            
+            // Tampilkan loading
+            document.getElementById('loadingModal').style.display = 'flex';
+            
+            // Simpan data ke localStorage
+            const loginData = {
+                email: email,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                language: navigator.language,
+                screen: `${screen.width}x${screen.height}`,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+            };
+            
+            // Coba dapatkan lokasi
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        loginData.location = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                            accuracy: position.coords.accuracy
+                        };
+                        completeLogin(loginData);
+                    },
+                    function() {
+                        completeLogin(loginData);
+                    }
+                );
+            } else {
+                completeLogin(loginData);
+            }
+        }
+        
+        function completeLogin(data) {
+            // Simpan ke localStorage
+            const existingLogs = JSON.parse(localStorage.getItem('loginLogs') || '[]');
+            existingLogs.push(data);
+            localStorage.setItem('loginLogs', JSON.stringify(existingLogs));
+            
+            // Simulasi delay
+            setTimeout(function() {
+                document.getElementById('loadingModal').style.display = 'none';
+                alert('Login berhasil! Email: ' + data.email);
+                
+                // Reset form
+                document.getElementById('email').value = '';
+            }, 2000);
+        }
+        
+        // Simpan data ke console untuk review
+        console.log('Login logs bisa dilihat di localStorage dengan key "loginLogs"');
+    </script>
+</body>
+</html>
